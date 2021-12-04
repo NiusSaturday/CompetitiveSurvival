@@ -55,6 +55,8 @@ dependencies {
 //    testImplementation("br.com.devsrsouza.kotlinbukkitapi:architecture:$kotlinbukkitapi_version", changing)
     testImplementation("br.com.devsrsouza.kotlinbukkitapi:serialization:$kotlinbukkitapi_version", changing)
 
+    testImplementation("org.spigotmc:spigot-api:$spigot_version")
+
     //compileOnly("br.com.devsrsouza.kotlinbukkitapi:exposed:$kotlinbukkitapi_version", changing)
     //compileOnly("br.com.devsrsouza.kotlinbukkitapi:plugins:$kotlinbukkitapi_version", changing)
 
@@ -69,7 +71,7 @@ dependencies {
     //implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("com.github.seeseemelk:MockBukkit-v1.15:0.3.0")
+    testImplementation("me.lulu:MockBukkit-v1.17:1.12.0")
 
 }
 
