@@ -1,15 +1,15 @@
 plugins {
-    kotlin("jvm") version "1.3.71"
+    kotlin("jvm") version "1.5.0"
     id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
     id("com.github.johnrengelman.shadow") version "5.2.0"
-    kotlin("plugin.serialization") version "1.3.71"
+    kotlin("plugin.serialization") version "1.5.0"
 }
 
 group = "me.lulu.competitivesurvival"
 version = "0.1.0-SNAPSHOT"
 
 val spigot_version = "1.8.8-R0.1-SNAPSHOT"
-val kotlinbukkitapi_version = "0.1.0-SNAPSHOT"
+val kotlinbukkitapi_version = "1.0.0"
 
 //val hikaricp_version = "3.4.1" // optional dependency
 //val exposed_version = "0.21.1" // optional dependency
@@ -21,6 +21,10 @@ repositories {
     maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
 
+    mavenLocal()
+    google()
+
+
     // KotlinBukkitAPI
     maven { url = uri("http://nexus.devsrsouza.com.br/repository/maven-public/") }
 
@@ -31,7 +35,12 @@ repositories {
 }
 
 dependencies {
-    val changing = Action<ExternalModuleDependency> { isChanging = true }
+    val changing = Action<ExternalModuleDependency> {
+        isChanging = true
+
+//        一直無法 include 進來，又因為 test 需要 testImplementation kotlin bukkit api，所以只好 ignore 它
+        exclude("me.bristermitten", "pdm")
+    }
 
     compileOnly(kotlin("stdlib-jdk8")) // embedded in KotlinBukkitAPI
 
@@ -39,11 +48,11 @@ dependencies {
 
     // KotlinBukkitAPI
     compileOnly("br.com.devsrsouza.kotlinbukkitapi:core:$kotlinbukkitapi_version", changing)
-    compileOnly("br.com.devsrsouza.kotlinbukkitapi:architecture:$kotlinbukkitapi_version", changing)
+//    compileOnly("br.com.devsrsouza.kotlinbukkitapi:architecture:$kotlinbukkitapi_version", changing)
     compileOnly("br.com.devsrsouza.kotlinbukkitapi:serialization:$kotlinbukkitapi_version", changing)
 
     testImplementation("br.com.devsrsouza.kotlinbukkitapi:core:$kotlinbukkitapi_version", changing)
-    testImplementation("br.com.devsrsouza.kotlinbukkitapi:architecture:$kotlinbukkitapi_version", changing)
+//    testImplementation("br.com.devsrsouza.kotlinbukkitapi:architecture:$kotlinbukkitapi_version", changing)
     testImplementation("br.com.devsrsouza.kotlinbukkitapi:serialization:$kotlinbukkitapi_version", changing)
 
     //compileOnly("br.com.devsrsouza.kotlinbukkitapi:exposed:$kotlinbukkitapi_version", changing)
