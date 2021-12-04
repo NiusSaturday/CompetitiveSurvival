@@ -41,6 +41,11 @@ dependencies {
     compileOnly("br.com.devsrsouza.kotlinbukkitapi:core:$kotlinbukkitapi_version", changing)
     compileOnly("br.com.devsrsouza.kotlinbukkitapi:architecture:$kotlinbukkitapi_version", changing)
     compileOnly("br.com.devsrsouza.kotlinbukkitapi:serialization:$kotlinbukkitapi_version", changing)
+
+    testImplementation("br.com.devsrsouza.kotlinbukkitapi:core:$kotlinbukkitapi_version", changing)
+    testImplementation("br.com.devsrsouza.kotlinbukkitapi:architecture:$kotlinbukkitapi_version", changing)
+    testImplementation("br.com.devsrsouza.kotlinbukkitapi:serialization:$kotlinbukkitapi_version", changing)
+
     //compileOnly("br.com.devsrsouza.kotlinbukkitapi:exposed:$kotlinbukkitapi_version", changing)
     //compileOnly("br.com.devsrsouza.kotlinbukkitapi:plugins:$kotlinbukkitapi_version", changing)
 
@@ -53,6 +58,10 @@ dependencies {
     //implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     //implementation("org.jetbrains.exposed:exposed-java-jdbc:$exposed_version")
     //implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("com.github.seeseemelk:MockBukkit-v1.15:0.3.0")
+
 }
 
 bukkit {
