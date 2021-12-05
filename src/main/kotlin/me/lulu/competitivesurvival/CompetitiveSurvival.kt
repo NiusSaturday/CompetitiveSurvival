@@ -18,10 +18,17 @@ class CompetitiveSurvival : KotlinPlugin {
     )
 
     override fun onPluginEnable() {
-
+        registerDeathListener()
     }
 
     fun setupWorld(world: World) {
         world.difficulty = Difficulty.HARD
+        setupWorldBorder(world)
+    }
+
+    private fun setupWorldBorder(world: World) {
+        val border = world.worldBorder
+        border.setCenter(0.0, 0.0)
+        border.size = 16.0
     }
 }
