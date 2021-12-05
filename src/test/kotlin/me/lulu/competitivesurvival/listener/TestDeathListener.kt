@@ -1,6 +1,7 @@
-package me.lulu.competitivesurvival
+package me.lulu.competitivesurvival.listener
 
-import be.seeseemelk.mockbukkit.entity.PlayerMock
+import me.lulu.competitivesurvival.Config
+import MockBukkitTemplate
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack

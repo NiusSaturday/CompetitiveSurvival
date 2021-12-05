@@ -1,4 +1,4 @@
-package me.lulu.competitivesurvival.mocks
+package mocks
 
 import be.seeseemelk.mockbukkit.WorldMock
 import org.bukkit.Location

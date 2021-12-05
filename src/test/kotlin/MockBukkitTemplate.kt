@@ -1,7 +1,6 @@
-package me.lulu.competitivesurvival
-
 import be.seeseemelk.mockbukkit.MockBukkit
 import be.seeseemelk.mockbukkit.ServerMock
+import me.lulu.competitivesurvival.CompetitiveSurvival
 import org.junit.After
 import org.junit.Before
 import java.io.File

@@ -1,6 +1,7 @@
 package me.lulu.competitivesurvival
 
-import me.lulu.competitivesurvival.mocks.WorldMockImpl
+import MockBukkitTemplate
+import mocks.WorldMockImpl
 import org.bukkit.Difficulty
 import org.junit.Assert.assertEquals
 import org.junit.Test
