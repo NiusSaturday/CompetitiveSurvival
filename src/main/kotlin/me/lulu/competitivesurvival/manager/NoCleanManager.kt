@@ -1,6 +1,7 @@
 package me.lulu.competitivesurvival.manager
 
 import br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle.LifecycleListener
+import com.sun.javafx.scene.traversal.SubSceneTraversalEngine
 import me.lulu.competitivesurvival.CompetitiveSurvival
 import me.lulu.competitivesurvival.Config
 import org.bukkit.entity.Player
@@ -16,6 +17,10 @@ class NoCleanManager(override val plugin: CompetitiveSurvival) : LifecycleListen
 
     fun setNoCleanSeconds(player: Player, noCleanSeconds: Int) {
         noCleanMap[player.uniqueId] = System.currentTimeMillis() + (noCleanSeconds * 1000)
+    }
+
+    fun isNoCleaning(player: Player): Boolean {
+        return getNoCleanEnds(player) > System.currentTimeMillis()
     }
 
 }

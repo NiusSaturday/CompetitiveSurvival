@@ -19,13 +19,17 @@ class TestNoCleanManager : MockBukkitTemplate() {
 
     @Test
     fun default_NoCleanTimeIsCurrentTime() {
-        manager.getNoCleanEnds(player) shouldBe System.currentTimeMillis()
+        assertNoClean(time = System.currentTimeMillis(), isNoClean = false)
     }
 
     @Test
     fun testAddNoClean() {
         manager.setNoCleanSeconds(player, 1)
+        assertNoClean(time = System.currentTimeMillis() + 1000, isNoClean = true)
+    }
 
-        manager.getNoCleanEnds(player) shouldBe System.currentTimeMillis() + 1000
+    private fun assertNoClean(time: Long, isNoClean: Boolean) {
+        manager.getNoCleanEnds(player) shouldBe time
+        manager.isNoCleaning(player) shouldBe isNoClean
     }
 }

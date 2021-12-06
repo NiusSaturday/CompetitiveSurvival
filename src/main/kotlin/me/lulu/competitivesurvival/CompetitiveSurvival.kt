@@ -1,6 +1,7 @@
 package me.lulu.competitivesurvival
 
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
+import me.lulu.competitivesurvival.listener.registerDamageListener
 import me.lulu.competitivesurvival.manager.NoCleanManager
 import org.bukkit.Difficulty
 import org.bukkit.World
@@ -13,6 +14,7 @@ class CompetitiveSurvival : KotlinPlugin {
 
     override fun onPluginEnable() {
         registerDeathListener()
+        registerDamageListener()
     }
 
     fun setupWorld(world: World) {
