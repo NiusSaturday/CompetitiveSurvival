@@ -1,24 +1,23 @@
 package me.lulu.competitivesurvival
 
 import MockBukkitTemplate
+import io.kotest.matchers.shouldBe
 import mocks.WorldMockImpl
 import org.bukkit.Difficulty
 import org.bukkit.World
-import org.junit.Assert.assertEquals
-import org.junit.Test
 
 class PluginTest : MockBukkitTemplate() {
 
     @Test
     fun worldSetup_Difficulty() = runWorldSetup {
-        assertEquals(Difficulty.HARD, it.difficulty)
+        Difficulty.HARD shouldBe it.difficulty
     }
 
     @Test
     fun worldSetup_WorldBorder() = runWorldSetup {
-        assertEquals(16.0, it.worldBorder.size, 0.0)
-        assertEquals(0.0, it.worldBorder.center.x, 0.0)
-        assertEquals(0.0, it.worldBorder.center.y, 0.0)
+        it.worldBorder.size shouldBe 16.0
+        it.worldBorder.center.x shouldBe 0.0
+        it.worldBorder.center.y shouldBe 0.0
     }
 
     private fun runWorldSetup(after: (World) -> Unit) {

@@ -70,10 +70,17 @@ dependencies {
     //implementation("org.jetbrains.exposed:exposed-java-jdbc:$exposed_version")
     //implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
 
-    testImplementation("junit:junit:4.13.2")
     testImplementation("me.lulu:MockBukkit-v1.17:1.12.0")
 
+
+    val koTestVersion = "5.0.1"
+
+    testImplementation("io.kotest:kotest-runner-junit5:$koTestVersion")
+    testImplementation("io.kotest:kotest-assertions-core:$koTestVersion")
+    testImplementation("io.kotest:kotest-property:$koTestVersion")
 }
+
+
 
 bukkit {
     main = "${project.group}.${project.name.toLowerCase()}.${project.name}Plugin"
@@ -93,6 +100,10 @@ tasks {
     shadowJar {
         classifier = null
     }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 configurations.all {

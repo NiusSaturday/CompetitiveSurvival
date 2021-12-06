@@ -1,28 +1,30 @@
 package me.lulu.competitivesurvival.listener
 
-import me.lulu.competitivesurvival.Config
 import MockBukkitTemplate
 import be.seeseemelk.mockbukkit.WorldMock
+import io.kotest.matchers.doubles.shouldBeLessThan
+import io.kotest.matchers.shouldBe
+import me.lulu.competitivesurvival.Config
 import mocks.WorldMockImpl
 import org.bukkit.Location
 import org.bukkit.Material
-import org.bukkit.World
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Test
+import kotlin.math.abs
 
 class TestDeathListener : MockBukkitTemplate() {
 
     private lateinit var player: Player
     private lateinit var world: WorldMock;
 
-    @Before
-    fun loadPlayer() {
+    @BeforeEach
+    override fun setup() {
+        super.setup()
+
         this.player = mock.addPlayer()
         this.world = WorldMockImpl()
+        world.name = Config.WORLD_NAME
+        mock.addWorld(world)
 
         this.player.teleport(world.spawnLocation)
     }
@@ -32,13 +34,13 @@ class TestDeathListener : MockBukkitTemplate() {
         player.inventory.addItem(ItemStack(Material.STONE))
 
         afterKill {
-            assertTrue(player.inventory.isEmpty)
+            player.inventory.isEmpty shouldBe true
         }
     }
 
     @Test
     fun playerDeath_GainFullHealth() = afterKill {
-        assertEquals(Config.RESPAWN_HEALTH, player.health, 0.0)
+        player.health shouldBe Config.RESPAWN_HEALTH
     }
 
     @Test
@@ -48,18 +50,25 @@ class TestDeathListener : MockBukkitTemplate() {
         player.teleport(Location(world, 1000.0, 0.0, 1000.0))
 
         afterKill {
-            assertEquals(Config.RESPAWN_Y, player.location.y, 0.0)
-            assertTrue(world.worldBorder.isInside(player.location))
+            val location = player.location
+
+            location.y shouldBe Config.RESPAWN_Y
+
+            abs(location.x) shouldBeLessThan world.worldBorder.size
+            abs(location.z) shouldBeLessThan world.worldBorder.size
         }
     }
 
     @Test
     fun playerDeath_AlwaysRespawnInMainWorld() {
+        val anotherWorld = WorldMockImpl()
 
+        player.teleport(anotherWorld.spawnLocation)
+
+        afterKill {
+            player.world.name shouldBe Config.WORLD_NAME
+        }
     }
-
-    //todo 死在終界跟地獄的 Test
-
 
     private fun afterKill(checks: () -> Unit) {
         player.health = 0.0

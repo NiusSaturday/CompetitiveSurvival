@@ -17,7 +17,7 @@ class WorldMockImpl : WorldMock() {
 }
 
 class MockWorldBorder(world: World) : WorldBorder {
-    private var size = -1.0;
+    private var size = 29999984.0;
     private var center = Location(world, 0.0, 0.0, 0.0)
 
     override fun reset() {
