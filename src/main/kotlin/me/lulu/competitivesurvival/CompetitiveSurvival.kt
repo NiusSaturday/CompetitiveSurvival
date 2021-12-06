@@ -11,6 +11,7 @@ import java.io.File
 
 class CompetitiveSurvival : KotlinPlugin {
     val noCleanManager = lifecycle { NoCleanManager(this) }
+    var pvpEnable: Boolean = false
 
     override fun onPluginEnable() {
         registerDeathListener()

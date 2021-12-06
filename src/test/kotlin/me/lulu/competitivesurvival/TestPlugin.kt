@@ -6,7 +6,7 @@ import mocks.WorldMockImpl
 import org.bukkit.Difficulty
 import org.bukkit.World
 
-class PluginTest : MockBukkitTemplate() {
+class TestPlugin : MockBukkitTemplate() {
 
     @Test
     fun worldSetup_Difficulty() = runWorldSetup {
@@ -19,6 +19,9 @@ class PluginTest : MockBukkitTemplate() {
         it.worldBorder.center.x shouldBe 0.0
         it.worldBorder.center.y shouldBe 0.0
     }
+
+    @Test
+    fun pvp_disableByDefault() = plugin.pvpEnable shouldBe false
 
     private fun runWorldSetup(after: (World) -> Unit) {
         val world = WorldMockImpl()

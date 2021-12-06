@@ -16,6 +16,9 @@ fun CompetitiveSurvival.registerDamageListener() = events {
 
         if (noCleanManager.isNoCleaning(player))
             isCancelled = true
+
+        if (!pvpEnable)
+            isCancelled = true
     }
 
 }
