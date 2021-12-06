@@ -18,31 +18,44 @@ class TestDamageListener : BehaviorSpec({
     lateinit var mock: ServerMock
     lateinit var plugin: CompetitiveSurvival
 
-    beforeTest {
-        if (it.isRootTest()) {
-            mock = MockBukkit.mock()
-            plugin = MockBukkit.loadWith(CompetitiveSurvival::class.java, File("src/main/resources/plugin.yml"));
-            player = mock.addPlayer()
-        }
-    }
-
-    afterTest {
-        if (it.a.isRootTest()) {
-            MockBukkit.unmock()
-        }
-    }
 
     given("setup") {
+        beforeTest {
+            if (it.parent?.equals(this.testCase) == true) {
+                mock = MockBukkit.mock()
+                plugin = MockBukkit.loadWith(CompetitiveSurvival::class.java, File("src/main/resources/plugin.yml"));
+                player = mock.addPlayer()
+            }
+        }
+
+        afterTest {
+            if (it.a.parent?.equals(this.testCase) == true) {
+                MockBukkit.unmock()
+            }
+        }
+
         When("PvP is not enabled") {
             plugin.pvpEnable = false
             val event = damageEvent(player)
 
             then("Any Damage Should Be Ignored") {
-                event.isCancelled shouldBe true
+                assertDamageEventCancelled(player, true)
+            }
+        }
+
+        When("PvP is enabled") {
+            plugin.pvpEnable = true
+
+            then("Default Damage Allowed") {
+                assertDamageEventCancelled(player, false)
             }
         }
     }
 })
+
+private fun assertDamageEventCancelled(player: Player, cancelled: Boolean) {
+    damageEvent(player).isCancelled shouldBe cancelled
+}
 
 private fun damageEvent(player: Player): EntityDamageEvent {
     val event = EntityDamageEvent(player, EntityDamageEvent.DamageCause.CONTACT, 1.0)
