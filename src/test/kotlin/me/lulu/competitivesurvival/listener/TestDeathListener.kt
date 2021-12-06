@@ -70,6 +70,14 @@ class TestDeathListener : MockBukkitTemplate() {
         }
     }
 
+    @Test
+    fun playerDeath_NoClean() = afterKill {
+        val timeUntilNoCleanEnds = plugin.noCleanManager.getNoCleanEnds(player)
+        val exceptedTime = System.currentTimeMillis() + (Config.NO_CLEAN_SECONDS * 1000)
+
+        timeUntilNoCleanEnds shouldBe exceptedTime
+    }
+
     private fun afterKill(checks: () -> Unit) {
         player.health = 0.0
         checks.invoke()
