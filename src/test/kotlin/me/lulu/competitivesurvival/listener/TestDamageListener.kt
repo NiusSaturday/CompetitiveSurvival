@@ -5,49 +5,65 @@ import be.seeseemelk.mockbukkit.ServerMock
 import be.seeseemelk.mockbukkit.entity.PlayerMock
 import br.com.devsrsouza.kotlinbukkitapi.extensions.server.pluginManager
 import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.test.isRootTest
 import io.kotest.matchers.shouldBe
 import me.lulu.competitivesurvival.CompetitiveSurvival
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause
 import java.io.File
 
-class TestDamageListener : BehaviorSpec({
+class TestDamageListener : DescribeSpec({
 
     lateinit var player: PlayerMock
     lateinit var mock: ServerMock
     lateinit var plugin: CompetitiveSurvival
 
 
-    given("setup") {
-        beforeTest {
-            if (it.parent?.equals(this.testCase) == true) {
-                mock = MockBukkit.mock()
-                plugin = MockBukkit.loadWith(CompetitiveSurvival::class.java, File("src/main/resources/plugin.yml"));
-                player = mock.addPlayer()
-            }
+    beforeTest {
+        if (it.parent?.name?.testName == "setup") {
+            mock = MockBukkit.mock()
+            plugin = MockBukkit.loadWith(CompetitiveSurvival::class.java, File("src/main/resources/plugin.yml"));
+            player = mock.addPlayer()
         }
+    }
 
-        afterTest {
-            if (it.a.parent?.equals(this.testCase) == true) {
-                MockBukkit.unmock()
-            }
+    afterTest {
+        if (it.a.parent?.name?.testName == "setup") {
+            MockBukkit.unmock()
         }
+    }
 
-        When("PvP is not enabled") {
+    describe("setup") {
+        describe("PvP is not enabled") {
             plugin.pvpEnable = false
             val event = damageEvent(player)
 
-            then("Any Damage Should Be Ignored") {
+            it("Any Damage Should Be Ignored") {
                 assertDamageEventCancelled(player, true)
             }
         }
 
-        When("PvP is enabled") {
+        describe("PvP is enabled") {
             plugin.pvpEnable = true
 
-            then("Default Damage Allowed") {
+            it("Default Damage Allowed") {
                 assertDamageEventCancelled(player, false)
+            }
+
+            describe("Player got no clean") {
+                beforeTest {
+                    plugin.noCleanManager.setNoCleanSeconds(player, 10)
+                }
+
+                afterTest {
+                    plugin.noCleanManager.setNoCleanSeconds(player, 0)
+                }
+
+                it("Damage should be cancelled") {
+                    assertDamageEventCancelled(player, true)
+                }
             }
         }
     }
@@ -57,8 +73,8 @@ private fun assertDamageEventCancelled(player: Player, cancelled: Boolean) {
     damageEvent(player).isCancelled shouldBe cancelled
 }
 
-private fun damageEvent(player: Player): EntityDamageEvent {
-    val event = EntityDamageEvent(player, EntityDamageEvent.DamageCause.CONTACT, 1.0)
+private fun damageEvent(player: Player, cause: DamageCause = DamageCause.VOID): EntityDamageEvent {
+    val event = EntityDamageEvent(player, cause, 1.0)
     pluginManager.callEvent(event)
 
     return event
