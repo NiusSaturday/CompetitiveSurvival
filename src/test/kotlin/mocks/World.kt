@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.WorldMock
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.WorldBorder
+import kotlin.math.abs
 
 
 class WorldMockImpl : WorldMock() {
@@ -80,6 +81,6 @@ class MockWorldBorder(world: World) : WorldBorder {
     }
 
     override fun isInside(location: Location): Boolean {
-        TODO("Not yet implemented")
+        return (abs(location.x) <= abs(size / 2)) || (abs(location.z) <= abs(size / 2))
     }
 }
