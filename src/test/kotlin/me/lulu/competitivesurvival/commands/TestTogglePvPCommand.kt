@@ -1,33 +1,27 @@
 package me.lulu.competitivesurvival.commands
 
-import MockDescribeTemplate
-import be.seeseemelk.mockbukkit.entity.PlayerMock
 import io.kotest.matchers.shouldBe
+import me.lulu.competitivesurvival.CommandTestTemplate
 import me.lulu.competitivesurvival.Config
+import org.bukkit.command.Command
 
-class TestTogglePvPCommand : MockDescribeTemplate() {
+class TestTogglePvPCommand : CommandTestTemplate() {
 
-    private lateinit var player: PlayerMock
-
-    override fun beforeEachRoot() {
-        player = mock.addPlayer()
-    }
+    override fun getTestCommand(): Command = plugin.togglePvPCommand
 
     init {
-        it("command should be registered") {
-            plugin.togglePvPCommand.isRegistered shouldBe true
-        }
+        assertCommandRegistered()
 
         describe("Executed without permission") {
             executeCommand()
 
             it("send no permission message") {
-                player.nextMessage() shouldBe Config.NO_PERMISSION
+                sender.nextMessage() shouldBe Config.NO_PERMISSION
             }
         }
 
         describe("Executed with permission") {
-            player.addAttachment(plugin, Config.PERM_TOGGLE_PVP, true)
+            addPermission(Config.PERM_TOGGLE_PVP)
 
             val oldPvPState = plugin.pvpEnable
             executeCommand()
@@ -36,9 +30,5 @@ class TestTogglePvPCommand : MockDescribeTemplate() {
                 plugin.pvpEnable shouldBe !oldPvPState
             }
         }
-    }
-
-    private fun executeCommand() {
-        plugin.togglePvPCommand.execute(player, Config.CMD_TOGGLE_PVP, arrayOf())
     }
 }
