@@ -11,6 +11,9 @@ object Config {
     val CMD_TOGGLE_PVP = "toggle-pvp"
     val PERM_TOGGLE_PVP = "toggle-pvp".asPerm()
 
+    val CMD_GM = "gm"
+    val PERM_GM = "gm".asPerm()
+
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
 
     private fun String.asPerm(): String {

@@ -34,7 +34,7 @@ class TestDeathListener : MockBukkitTemplate() {
         player.inventory.addItem(ItemStack(Material.STONE))
 
         afterKill {
-            player.inventory.isEmpty shouldBe true
+            player.inventory.isEmpty shouldBe false
         }
     }
 

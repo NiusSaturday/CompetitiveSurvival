@@ -13,6 +13,7 @@ fun CompetitiveSurvival.registerDeathListener() = events {
     event<PlayerDeathEvent> {
         val player = entity
 
+        keepInventory = true
         fullHealth(player)
         randomTpToMainWorldInsideBorder(player)
         addNoClean(player)

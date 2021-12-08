@@ -1,7 +1,7 @@
 package me.lulu.competitivesurvival.commands
 
 import io.kotest.matchers.shouldBe
-import me.lulu.competitivesurvival.CommandTestTemplate
+import CommandTestTemplate
 import me.lulu.competitivesurvival.Config
 import org.bukkit.command.Command
 
@@ -13,6 +13,7 @@ class TestTogglePvPCommand : CommandTestTemplate() {
         assertCommandRegistered()
 
         describe("Executed without permission") {
+            println("1 - ${sender}")
             executeCommand()
 
             it("send no permission message") {
@@ -21,6 +22,7 @@ class TestTogglePvPCommand : CommandTestTemplate() {
         }
 
         describe("Executed with permission") {
+            println("2 - ${sender}}")
             addPermission(Config.PERM_TOGGLE_PVP)
 
             val oldPvPState = plugin.pvpEnable

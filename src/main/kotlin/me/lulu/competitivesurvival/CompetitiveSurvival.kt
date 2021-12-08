@@ -2,6 +2,7 @@ package me.lulu.competitivesurvival
 
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
 import br.com.devsrsouza.kotlinbukkitapi.dsl.command.CommandDSL
+import me.lulu.competitivesurvival.commands.registerGmCommand
 import me.lulu.competitivesurvival.commands.registerTogglePvPCommand
 import me.lulu.competitivesurvival.listener.registerDamageListener
 import me.lulu.competitivesurvival.manager.NoCleanManager
@@ -16,9 +17,11 @@ class CompetitiveSurvival : KotlinPlugin {
     var pvpEnable: Boolean = false
 
     lateinit var togglePvPCommand: CommandDSL
+    lateinit var gmCommand: CommandDSL
 
     override fun onPluginEnable() {
         togglePvPCommand = registerTogglePvPCommand()
+        gmCommand = registerGmCommand()
 
         registerDeathListener()
         registerDamageListener()

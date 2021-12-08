@@ -1,6 +1,3 @@
-package me.lulu.competitivesurvival
-
-import MockDescribeTemplate
 import be.seeseemelk.mockbukkit.entity.PlayerMock
 import io.kotest.matchers.shouldBe
 import org.bukkit.command.Command
@@ -13,7 +10,7 @@ abstract class CommandTestTemplate : MockDescribeTemplate() {
     }
 
     protected fun executeCommand(vararg args: String) {
-        plugin.togglePvPCommand.execute(sender, getTestCommand().label, args)
+        getTestCommand().execute(sender, getTestCommand().label, args)
     }
 
     protected fun assertCommandRegistered() {
