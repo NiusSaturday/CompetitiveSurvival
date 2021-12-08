@@ -14,6 +14,10 @@ class TestTogglePvPCommand : MockDescribeTemplate() {
     }
 
     init {
+        it("command should be registered") {
+            plugin.togglePvPCommand.isRegistered shouldBe true
+        }
+
         describe("Executed without permission") {
             executeCommand()
 
