@@ -1,8 +1,12 @@
 import be.seeseemelk.mockbukkit.MockBukkit
 import be.seeseemelk.mockbukkit.ServerMock
+import br.com.devsrsouza.kotlinbukkitapi.KotlinBukkitAPI
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.test.isRootTest
 import me.lulu.competitivesurvival.CompetitiveSurvival
+import me.lulu.competitivesurvival.commands.registerTogglePvPCommand
+import org.bukkit.Bukkit
+import org.bukkit.command.SimpleCommandMap
 import java.io.File
 
 open class MockDescribeTemplate : DescribeSpec() {
@@ -13,8 +17,9 @@ open class MockDescribeTemplate : DescribeSpec() {
         beforeTest {
             if (it.isRootTest()) {
                 mock = MockBukkit.mock()
-                MockBukkit.loadJar("lib/KotlinBukkitAPI-1.0.0.jar")
+                MockBukkit.loadWith(KotlinBukkitAPI::class.java, File("lib/kt-api.yml"))
                 plugin = MockBukkit.loadWith(CompetitiveSurvival::class.java, File("src/main/resources/plugin.yml"));
+
                 beforeEachRoot()
             }
         }

@@ -1,6 +1,7 @@
 package me.lulu.competitivesurvival.commands
 
 import br.com.devsrsouza.kotlinbukkitapi.dsl.command.command
+import br.com.devsrsouza.kotlinbukkitapi.extensions.command.register
 import me.lulu.competitivesurvival.CompetitiveSurvival
 import me.lulu.competitivesurvival.Config
 

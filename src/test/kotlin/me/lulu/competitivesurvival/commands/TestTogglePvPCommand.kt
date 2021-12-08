@@ -35,6 +35,6 @@ class TestTogglePvPCommand : MockDescribeTemplate() {
     }
 
     private fun executeCommand() {
-        player.performCommand(Config.CMD_TOGGLE_PVP)
+        plugin.togglePvPCommand.execute(player, Config.CMD_TOGGLE_PVP, arrayOf())
     }
 }
