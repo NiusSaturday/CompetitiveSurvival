@@ -13,7 +13,6 @@ class TestTogglePvPCommand : CommandTestTemplate() {
         assertCommandRegistered()
 
         describe("Executed without permission") {
-            println("1 - ${sender}")
             executeCommand()
 
             it("send no permission message") {
@@ -22,7 +21,6 @@ class TestTogglePvPCommand : CommandTestTemplate() {
         }
 
         describe("Executed with permission") {
-            println("2 - ${sender}}")
             addPermission(Config.PERM_TOGGLE_PVP)
 
             val oldPvPState = plugin.pvpEnable

@@ -1,5 +1,6 @@
 package me.lulu.competitivesurvival
 
+import br.com.devsrsouza.kotlinbukkitapi.extensions.text.asText
 import br.com.devsrsouza.kotlinbukkitapi.extensions.text.unaryPlus
 
 object Config {
@@ -13,6 +14,7 @@ object Config {
 
     val CMD_GM = "gm"
     val PERM_GM = "gm".asPerm()
+    val GM_HELP = (+"&c使用方法: /gm <c/s>").asText()
 
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
 
