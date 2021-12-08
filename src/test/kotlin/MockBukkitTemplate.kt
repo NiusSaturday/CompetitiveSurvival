@@ -1,5 +1,6 @@
 import be.seeseemelk.mockbukkit.MockBukkit
 import be.seeseemelk.mockbukkit.ServerMock
+import br.com.devsrsouza.kotlinbukkitapi.KotlinBukkitAPI
 import io.kotest.core.spec.style.AnnotationSpec
 import me.lulu.competitivesurvival.CompetitiveSurvival
 import java.io.File

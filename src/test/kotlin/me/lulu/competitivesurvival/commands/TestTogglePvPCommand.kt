@@ -1,9 +1,40 @@
 package me.lulu.competitivesurvival.commands
 
-import io.kotest.core.spec.style.DescribeSpec
+import MockDescribeTemplate
+import be.seeseemelk.mockbukkit.entity.PlayerMock
+import io.kotest.matchers.shouldBe
+import me.lulu.competitivesurvival.Config
 
-class TestTogglePvPCommand : DescribeSpec({
+class TestTogglePvPCommand : MockDescribeTemplate() {
 
+    private lateinit var player: PlayerMock
 
+    override fun beforeEachRoot() {
+        player = mock.addPlayer()
+    }
 
-})
+    init {
+        describe("Executed without permission") {
+            executeCommand()
+
+            it("send no permission message") {
+                player.nextMessage() shouldBe Config.NO_PERMISSION
+            }
+        }
+
+        describe("Executed with permission") {
+            player.addAttachment(plugin, Config.PERM_TOGGLE_PVP, true)
+
+            val oldPvPState = plugin.pvpEnable
+            executeCommand()
+
+            it("PvP should be toggled") {
+                plugin.pvpEnable shouldBe !oldPvPState
+            }
+        }
+    }
+
+    private fun executeCommand() {
+        player.performCommand(Config.CMD_TOGGLE_PVP)
+    }
+}

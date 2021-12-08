@@ -1,6 +1,7 @@
 package me.lulu.competitivesurvival
 
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
+import me.lulu.competitivesurvival.commands.registerTogglePvPCommand
 import me.lulu.competitivesurvival.listener.registerDamageListener
 import me.lulu.competitivesurvival.manager.NoCleanManager
 import org.bukkit.Difficulty
@@ -14,6 +15,8 @@ class CompetitiveSurvival : KotlinPlugin {
     var pvpEnable: Boolean = false
 
     override fun onPluginEnable() {
+        registerTogglePvPCommand()
+
         registerDeathListener()
         registerDamageListener()
     }
