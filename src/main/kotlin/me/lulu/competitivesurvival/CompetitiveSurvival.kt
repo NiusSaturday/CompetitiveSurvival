@@ -5,6 +5,7 @@ import br.com.devsrsouza.kotlinbukkitapi.dsl.command.CommandDSL
 import me.lulu.competitivesurvival.commands.registerGmCommand
 import me.lulu.competitivesurvival.commands.registerTogglePvPCommand
 import me.lulu.competitivesurvival.listener.registerDamageListener
+import me.lulu.competitivesurvival.listener.registerJoinListener
 import me.lulu.competitivesurvival.manager.NoCleanManager
 import org.bukkit.Difficulty
 import org.bukkit.World
@@ -15,6 +16,7 @@ import java.io.File
 class CompetitiveSurvival : KotlinPlugin {
     val noCleanManager = lifecycle { NoCleanManager(this) }
     var pvpEnable: Boolean = false
+    var gameState: GameState = GameState.WAITING
 
     lateinit var togglePvPCommand: CommandDSL
     lateinit var gmCommand: CommandDSL
@@ -25,6 +27,7 @@ class CompetitiveSurvival : KotlinPlugin {
 
         registerDeathListener()
         registerDamageListener()
+        registerJoinListener()
     }
 
     fun setupWorld(world: World) {

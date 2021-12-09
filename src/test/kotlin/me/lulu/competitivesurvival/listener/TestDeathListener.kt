@@ -2,15 +2,15 @@ package me.lulu.competitivesurvival.listener
 
 import MockBukkitTemplate
 import be.seeseemelk.mockbukkit.WorldMock
-import io.kotest.matchers.doubles.shouldBeLessThan
 import io.kotest.matchers.shouldBe
 import me.lulu.competitivesurvival.Config
+import me.lulu.competitivesurvival.TestUtils
+import me.lulu.competitivesurvival.TestUtils.afterKill
 import mocks.WorldMockImpl
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import kotlin.math.abs
 
 class TestDeathListener : MockBukkitTemplate() {
 
@@ -30,32 +30,26 @@ class TestDeathListener : MockBukkitTemplate() {
     }
 
     @Test
-    fun playerDeath_KeepInventory() {
+    fun playerDeath_DropInventory() {
         player.inventory.addItem(ItemStack(Material.STONE))
 
-        afterKill {
-            player.inventory.isEmpty shouldBe false
+        afterKill(player) {
+            player.inventory.isEmpty shouldBe true
         }
     }
 
     @Test
-    fun playerDeath_GainFullHealth() = afterKill {
+    fun playerDeath_GainFullHealth() = afterKill(player) {
         player.health shouldBe Config.RESPAWN_HEALTH
     }
 
     @Test
     fun playerDeath_RandomRespawnInsideWorldBorder() {
         world.worldBorder.size = 10.0
-
         player.teleport(Location(world, 1000.0, 0.0, 1000.0))
 
-        afterKill {
-            val location = player.location
-
-            location.y shouldBe Config.RESPAWN_Y
-
-            abs(location.x) shouldBeLessThan world.worldBorder.size
-            abs(location.z) shouldBeLessThan world.worldBorder.size
+        afterKill(player) {
+            TestUtils.isRespawnInsideWorldBorderAndSpecificY(player, world)
         }
     }
 
@@ -65,22 +59,17 @@ class TestDeathListener : MockBukkitTemplate() {
 
         player.teleport(anotherWorld.spawnLocation)
 
-        afterKill {
+        afterKill(player) {
             player.world.name shouldBe Config.WORLD_NAME
         }
     }
 
     @Test
-    fun playerDeath_NoClean() = afterKill {
+    fun playerDeath_NoClean() = afterKill(player) {
         val timeUntilNoCleanEnds = plugin.noCleanManager.getNoCleanEnds(player)
         val exceptedTime = System.currentTimeMillis() + (Config.NO_CLEAN_SECONDS * 1000)
 
         timeUntilNoCleanEnds shouldBe exceptedTime
-    }
-
-    private fun afterKill(checks: () -> Unit) {
-        player.health = 0.0
-        checks.invoke()
     }
 
 }

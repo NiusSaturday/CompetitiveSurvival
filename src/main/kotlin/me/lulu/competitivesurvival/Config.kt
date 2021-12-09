@@ -11,6 +11,9 @@ object Config {
 
     val CMD_TOGGLE_PVP = "toggle-pvp"
     val PERM_TOGGLE_PVP = "toggle-pvp".asPerm()
+    val TOGGLE_PVP_FAIL_WAITING_STATE = +"&c此指令在等待狀態還無法執行"
+    val PVP_TOGGLE_ON = +"&aPvP 已開啟"
+    val PVP_TOGGLE_OFF = +"&cPvP 已關閉"
 
     val CMD_GM = "gm"
     val PERM_GM = "gm".asPerm()

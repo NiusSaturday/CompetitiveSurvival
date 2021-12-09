@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock
 import br.com.devsrsouza.kotlinbukkitapi.extensions.server.pluginManager
 import io.kotest.core.test.isRootTest
 import io.kotest.matchers.shouldBe
+import me.lulu.competitivesurvival.GameState
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause

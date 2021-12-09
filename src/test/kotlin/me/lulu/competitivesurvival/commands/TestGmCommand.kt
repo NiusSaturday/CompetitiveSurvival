@@ -35,6 +35,11 @@ class TestGmCommand : CommandTestTemplate() {
                     sender.nextMessage() shouldBe Config.GM_HELP.toPlainText()
                 }
 
+                it("Execute with invalid args, send help message also") {
+                    executeCommand("K")
+                    sender.nextMessage() shouldBe Config.GM_HELP.toPlainText()
+                }
+
                 it("c args, makes player creative mode") {
                     executeCommand("c")
                     sender.gameMode shouldBe GameMode.CREATIVE
