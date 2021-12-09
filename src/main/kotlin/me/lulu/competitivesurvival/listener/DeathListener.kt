@@ -14,31 +14,6 @@ fun CompetitiveSurvival.registerDeathListener() = events {
         val player = entity
 
         keepInventory = false
-        fullHealth(player)
-        randomTpToMainWorldInsideBorder(player)
-        addNoClean(player)
     }
 
-}
-
-private fun CompetitiveSurvival.addNoClean(player: Player) {
-    noCleanManager.setNoCleanSeconds(player, Config.NO_CLEAN_SECONDS)
-}
-
-private fun fullHealth(player: Player) {
-    player.health = Config.RESPAWN_HEALTH
-}
-
-private fun randomTpToMainWorldInsideBorder(player: Player) {
-    val world = Bukkit.getWorld(Config.WORLD_NAME)
-    val radius = world.worldBorder.size
-
-    player.teleport(
-        Location(
-            world,
-            Random.nextDouble(-radius, radius),
-            Config.RESPAWN_Y,
-            Random.nextDouble(-radius, radius)
-        )
-    )
 }

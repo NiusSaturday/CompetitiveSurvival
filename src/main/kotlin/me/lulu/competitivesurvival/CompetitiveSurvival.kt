@@ -6,6 +6,7 @@ import me.lulu.competitivesurvival.commands.registerGmCommand
 import me.lulu.competitivesurvival.commands.registerTogglePvPCommand
 import me.lulu.competitivesurvival.listener.registerDamageListener
 import me.lulu.competitivesurvival.listener.registerJoinListener
+import me.lulu.competitivesurvival.listener.registerRespawnListener
 import me.lulu.competitivesurvival.manager.NoCleanManager
 import org.bukkit.Difficulty
 import org.bukkit.World
@@ -26,6 +27,7 @@ class CompetitiveSurvival : KotlinPlugin {
         gmCommand = registerGmCommand()
 
         registerDeathListener()
+        registerRespawnListener()
         registerDamageListener()
         registerJoinListener()
     }
