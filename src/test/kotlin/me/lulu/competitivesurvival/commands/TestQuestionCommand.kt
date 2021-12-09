@@ -22,14 +22,15 @@ class TestQuestionCommand : CommandTestTemplate() {
         }
 
         describe("With permission") {
-            beforeTest {
-                sender = mock.addPlayer()
+            beforeContainer {
                 addPermission(Config.PERM_QUESTION)
             }
 
-            it("1, 2 args, fail with usage message") {
-                assertInvalid("question", Config.QUESTION_HELP)
-                assertInvalid("question answer", Config.QUESTION_HELP)
+            describe("1,2 args") {
+                it("fail with usage message") {
+                    assertInvalid("question", Config.QUESTION_HELP)
+                    assertInvalid("question answer", Config.QUESTION_HELP)
+                }
             }
 
             describe("3 args") {
@@ -69,6 +70,15 @@ class TestQuestionCommand : CommandTestTemplate() {
                         question.rewardMaterial shouldBe Material.STONE
                         question.amount shouldBe 1
                         question.picks shouldBe 1
+                    }
+
+                    it("Question being broadcasted") {
+                        sender.nextTitle() shouldBe "${Config.QUESTION_TITLE_PREFIX}question"
+
+                        sender.nextSubTitle() shouldBe Config.QUESTION_SUB_TITLE
+                            .replace("<picks>", "1")
+                            .replace("<material>", "STONE")
+                            .replace("<amount>", "1")
                     }
                 }
             }

@@ -28,6 +28,8 @@ object Config {
     val QUESTION_HELP = (+"&c使用方法: /question <標題> <正確答案> <獎勵物品> <數量> <前幾位有效>").asText()
     val QUESTION_INVLID_MATERIAL = (+"&c無效的物品名稱").asText()
     val QUESTION_INVLID_NUMBER = (+"&c物品的數量應為數字").asText()
+    val QUESTION_TITLE_PREFIX = +"&c&l請問: &6&l"
+    val QUESTION_SUB_TITLE = +"&7前 &f&l<picks> &7位玩家將獲得 &e&l<material> x<amount>"
 
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
 

@@ -4,6 +4,7 @@ import br.com.devsrsouza.kotlinbukkitapi.dsl.command.arguments.int
 import br.com.devsrsouza.kotlinbukkitapi.dsl.command.arguments.material
 import br.com.devsrsouza.kotlinbukkitapi.dsl.command.arguments.string
 import br.com.devsrsouza.kotlinbukkitapi.dsl.command.command
+import br.com.devsrsouza.kotlinbukkitapi.extensions.server.onlinePlayers
 import me.lulu.competitivesurvival.CompetitiveSurvival
 import me.lulu.competitivesurvival.Config
 import me.lulu.competitivesurvival.Question
@@ -30,5 +31,15 @@ fun CompetitiveSurvival.registerQuestionCommand() = command(Config.CMD_QUESTION)
                 picks = picks
             )
         )
+
+        onlinePlayers.forEach {
+            it.sendTitle(
+                "${Config.QUESTION_TITLE_PREFIX}${title}",
+                Config.QUESTION_SUB_TITLE
+                    .replace("<picks>", "$picks")
+                    .replace("<material>", material.name)
+                    .replace("<amount>", "$amount")
+            )
+        }
     }
 }
