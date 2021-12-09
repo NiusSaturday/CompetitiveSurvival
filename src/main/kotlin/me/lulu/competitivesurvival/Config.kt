@@ -23,6 +23,8 @@ object Config {
     val PERM_STAFF = "staff".asPerm()
     val STAFF_MODE_ON = +"&a管理員模式已開啟"
 
+    val CMD_QUESTION = "question"
+
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
 
     private fun String.asPerm(): String {
