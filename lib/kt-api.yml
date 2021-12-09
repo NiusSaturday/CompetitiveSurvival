@@ -1,0 +1,9 @@
+name: KotlinBukkitAPI
+version: 1.0.0
+main: br.com.devsrsouza.kotlinbukkitapi.KotlinBukkitAPI
+description: KotlinBukkitAPI is an API for Bukkit/SpigotAPI using the cool and nifty
+  features Kotlin has to make your life more easier.
+load: STARTUP
+authors:
+ - DevSrSouza
+website: https://github.com/DevSrSouza/KotlinBukkitAPI

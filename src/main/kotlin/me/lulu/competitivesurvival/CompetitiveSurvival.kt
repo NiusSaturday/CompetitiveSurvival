@@ -12,8 +12,10 @@ import me.lulu.competitivesurvival.listener.registerRespawnListener
 import me.lulu.competitivesurvival.manager.NoCleanManager
 import me.lulu.competitivesurvival.manager.QuestionManager
 import me.lulu.competitivesurvival.manager.RoleManager
+import org.bukkit.Bukkit
 import org.bukkit.Difficulty
 import org.bukkit.World
+import org.bukkit.WorldCreator
 import org.bukkit.command.Command
 import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.java.JavaPluginLoader
@@ -31,6 +33,10 @@ class CompetitiveSurvival : KotlinPlugin {
     lateinit var staffCommand: CommandDSL
     lateinit var questionCommand: CommandDSL
 
+    /** todo
+     *   bukkit.createWorld() 要先能做基礎 mock，不然很多跟世界有關的東西很難測試
+     */
+
     override fun onPluginEnable() {
         togglePvPCommand = registerTogglePvPCommand()
         gmCommand = registerGmCommand()
@@ -41,6 +47,8 @@ class CompetitiveSurvival : KotlinPlugin {
         registerRespawnListener()
         registerDamageListener()
         registerJoinListener()
+
+        setupWorld(Bukkit.createWorld(WorldCreator(Config.WORLD_NAME)))
     }
 
     fun setupWorld(world: World) {

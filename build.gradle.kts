@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "1.5.0"
 }
 
-group = "me.lulu.competitivesurvival"
+group = "me.lulu"
 version = "0.1.0-SNAPSHOT"
 
 val spigot_version = "1.8.8-R0.1-SNAPSHOT"
@@ -83,7 +83,7 @@ dependencies {
 
 
 bukkit {
-    main = "${project.group}.${project.name.toLowerCase()}.${project.name}Plugin"
+    main = "${project.group}.${project.name.toLowerCase()}.${project.name}"
     author = "LU__LU"
     depend = listOf("KotlinBukkitAPI")
 
