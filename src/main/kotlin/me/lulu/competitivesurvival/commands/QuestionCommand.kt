@@ -6,6 +6,7 @@ import br.com.devsrsouza.kotlinbukkitapi.dsl.command.arguments.string
 import br.com.devsrsouza.kotlinbukkitapi.dsl.command.command
 import me.lulu.competitivesurvival.CompetitiveSurvival
 import me.lulu.competitivesurvival.Config
+import me.lulu.competitivesurvival.Question
 
 fun CompetitiveSurvival.registerQuestionCommand() = command(Config.CMD_QUESTION) {
     permission = Config.PERM_QUESTION
@@ -20,6 +21,14 @@ fun CompetitiveSurvival.registerQuestionCommand() = command(Config.CMD_QUESTION)
         val amount = int(3, argMissing = helpMessage, numberFormat = Config.QUESTION_INVLID_NUMBER)
         val picks = int(4, argMissing = helpMessage, numberFormat = Config.QUESTION_INVLID_NUMBER)
 
-
+        questionManager.addQuestion(
+            Question(
+                title = title,
+                answer = question,
+                rewardMaterial = material,
+                amount = amount,
+                picks = picks
+            )
+        )
     }
 }

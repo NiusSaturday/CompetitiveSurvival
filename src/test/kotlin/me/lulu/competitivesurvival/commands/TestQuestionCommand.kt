@@ -3,7 +3,9 @@ package me.lulu.competitivesurvival.commands
 import CommandTestTemplate
 import io.kotest.matchers.shouldBe
 import me.lulu.competitivesurvival.Config
+import me.lulu.competitivesurvival.Question
 import net.md_5.bungee.api.chat.TextComponent
+import org.bukkit.Material
 
 class TestQuestionCommand : CommandTestTemplate() {
     override fun getTestCommand() = plugin.questionCommand
@@ -56,10 +58,17 @@ class TestQuestionCommand : CommandTestTemplate() {
                 }
 
                 describe("Valid number") {
-                    executeCommand("question answer STONE 1 1")
+                    execCmdStr("question answer STONE 1 1")
 
                     it("Check question is added to question manager") {
+                        val questionManager = plugin.questionManager
+                        val question: Question = questionManager.getLatestQuestion()!!
 
+                        question.title shouldBe "question"
+                        question.answer shouldBe "answer"
+                        question.rewardMaterial shouldBe Material.STONE
+                        question.amount shouldBe 1
+                        question.picks shouldBe 1
                     }
                 }
             }
@@ -67,7 +76,11 @@ class TestQuestionCommand : CommandTestTemplate() {
     }
 
     private fun assertInvalid(args: String, exceptedMessage: TextComponent) {
-        executeCommand(args = args.split(" ").toTypedArray())
+        execCmdStr(args)
         sender.nextMessage() shouldBe exceptedMessage.toPlainText()
+    }
+
+    private fun execCmdStr(argsInString: String) {
+        executeCommand(args = argsInString.split(" ").toTypedArray())
     }
 }
