@@ -52,15 +52,16 @@ class TestDamageListener : MockDescribeTemplate() {
             }
         }
     }
+
+    private fun assertDamageEventCancelled(player: Player, cancelled: Boolean) {
+        damageEvent(player).isCancelled shouldBe cancelled
+    }
+
+    private fun damageEvent(player: Player, cause: DamageCause = DamageCause.VOID): EntityDamageEvent {
+        val event = EntityDamageEvent(player, cause, 1.0)
+        pluginManager.callEvent(event)
+
+        return event
+    }
 }
 
-private fun assertDamageEventCancelled(player: Player, cancelled: Boolean) {
-    damageEvent(player).isCancelled shouldBe cancelled
-}
-
-private fun damageEvent(player: Player, cause: DamageCause = DamageCause.VOID): EntityDamageEvent {
-    val event = EntityDamageEvent(player, cause, 1.0)
-    pluginManager.callEvent(event)
-
-    return event
-}

@@ -19,6 +19,10 @@ object Config {
     val PERM_GM = "gm".asPerm()
     val GM_HELP = (+"&c使用方法: /gm <c/s>").asText()
 
+    val CMD_STAFF = "staff"
+    val PERM_STAFF = "staff".asPerm()
+    val STAFF_MODE_ON = +"&a管理員模式已開啟"
+
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
 
     private fun String.asPerm(): String {

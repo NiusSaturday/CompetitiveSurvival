@@ -15,7 +15,6 @@ fun CompetitiveSurvival.registerTogglePvPCommand() = command(Config.CMD_TOGGLE_P
     permissionMessage = Config.NO_PERMISSION
 
     executorPlayer {
-
         if (gameState == GameState.WAITING) {
             sender.msg(Config.TOGGLE_PVP_FAIL_WAITING_STATE)
             return@executorPlayer
