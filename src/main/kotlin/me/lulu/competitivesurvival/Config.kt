@@ -24,6 +24,10 @@ object Config {
     val STAFF_MODE_ON = +"&a管理員模式已開啟"
 
     val CMD_QUESTION = "question"
+    val PERM_QUESTION = "question".asPerm()
+    val QUESTION_HELP = (+"&c使用方法: /question <標題> <正確答案> <獎勵物品> <數量> <前幾位有效>").asText()
+    val QUESTION_INVLID_MATERIAL = (+"&c無效的物品名稱").asText()
+    val QUESTION_INVLID_NUMBER = (+"&c物品的數量應為數字").asText()
 
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
 
