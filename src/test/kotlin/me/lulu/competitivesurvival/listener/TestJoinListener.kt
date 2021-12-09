@@ -3,34 +3,37 @@ package me.lulu.competitivesurvival.listener
 import MockDescribeTemplate
 import be.seeseemelk.mockbukkit.entity.PlayerMock
 import br.com.devsrsouza.kotlinbukkitapi.extensions.server.worlds
-import io.kotest.core.annotation.Ignored
 import io.kotest.matchers.shouldBe
+import me.lulu.competitivesurvival.GameRole
 import me.lulu.competitivesurvival.GameState
+import me.lulu.competitivesurvival.makePlayer
 import org.bukkit.GameMode
+import org.bukkit.entity.Player
 
 class TestJoinListener : MockDescribeTemplate() {
-
-    private lateinit var player: PlayerMock
-
-    override fun beforeEachRoot() {
-        super.beforeEachRoot()
-
-        player = PlayerMock(mock, "TestPlayer")
-    }
-
     init {
         describe("Game is not yet started") {
             plugin.gameState = GameState.WAITING
 
             describe("Player join") {
-                mock.addPlayer(player)
+
+                var player: PlayerMock? = null
+
+                beforeTest {
+                    player = PlayerMock(mock, "TestPlayer")
+                    mock.addPlayer(player)
+                }
 
                 it("Should be adventure mode") {
-                    player.gameMode shouldBe GameMode.ADVENTURE
+                    player!!.gameMode shouldBe GameMode.ADVENTURE
                 }
 
                 it("Teleport to world spawn") {
-                    player.location shouldBe worlds.first().spawnLocation
+                    player!!.location shouldBe worlds.first().spawnLocation
+                }
+
+                it("Should be full health") {
+                    player!!.health shouldBe player!!.maxHealth
                 }
             }
         }
@@ -38,14 +41,27 @@ class TestJoinListener : MockDescribeTemplate() {
         describe("Game started") {
             plugin.gameState = GameState.GAMING
 
-            it("Staff join, do nothing") {
+            var player: PlayerMock? = null
 
+            beforeTest {
+                player = mock.makePlayer()
+            }
+
+            it("Staff join, don't kill") {
+                addRoleAndJoin(player!!, GameRole.STAFF)
+                player!!.isDead shouldBe false
             }
 
             it("Player join, kill") {
-
+                addRoleAndJoin(player!!, GameRole.PLAYER)
+                player!!.isDead shouldBe true
             }
         }
+    }
+
+    private fun addRoleAndJoin(playerMock: PlayerMock, role: GameRole) {
+        plugin.roleManager.setRole(playerMock, role)
+        mock.addPlayer(playerMock)
     }
 
 }

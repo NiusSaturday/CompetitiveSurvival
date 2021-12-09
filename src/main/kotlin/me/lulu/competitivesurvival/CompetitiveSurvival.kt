@@ -8,6 +8,7 @@ import me.lulu.competitivesurvival.listener.registerDamageListener
 import me.lulu.competitivesurvival.listener.registerJoinListener
 import me.lulu.competitivesurvival.listener.registerRespawnListener
 import me.lulu.competitivesurvival.manager.NoCleanManager
+import me.lulu.competitivesurvival.manager.RoleManager
 import org.bukkit.Difficulty
 import org.bukkit.World
 import org.bukkit.plugin.PluginDescriptionFile
@@ -15,6 +16,7 @@ import org.bukkit.plugin.java.JavaPluginLoader
 import java.io.File
 
 class CompetitiveSurvival : KotlinPlugin {
+    val roleManager = lifecycle { RoleManager(this) }
     val noCleanManager = lifecycle { NoCleanManager(this) }
     var pvpEnable: Boolean = false
     var gameState: GameState = GameState.WAITING

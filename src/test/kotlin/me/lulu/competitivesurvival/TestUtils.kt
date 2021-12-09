@@ -1,5 +1,8 @@
 package me.lulu.competitivesurvival
 
+import be.seeseemelk.mockbukkit.MockBukkit
+import be.seeseemelk.mockbukkit.ServerMock
+import be.seeseemelk.mockbukkit.entity.PlayerMock
 import io.kotest.matchers.doubles.shouldBeLessThan
 import io.kotest.matchers.shouldBe
 import org.bukkit.World
@@ -26,3 +29,5 @@ object TestUtils {
         checks.invoke()
     }
 }
+
+fun ServerMock.makePlayer(name: String = "TestPlayer") = PlayerMock(this, name)

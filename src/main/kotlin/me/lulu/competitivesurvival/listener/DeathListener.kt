@@ -11,8 +11,6 @@ import kotlin.random.Random
 fun CompetitiveSurvival.registerDeathListener() = events {
 
     event<PlayerDeathEvent> {
-        val player = entity
-
         keepInventory = false
     }
 
