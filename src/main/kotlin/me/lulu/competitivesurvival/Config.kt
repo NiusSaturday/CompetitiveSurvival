@@ -4,7 +4,7 @@ import br.com.devsrsouza.kotlinbukkitapi.extensions.text.asText
 import br.com.devsrsouza.kotlinbukkitapi.extensions.text.unaryPlus
 
 object Config {
-    const val WORLD_NAME = "game_world"
+    const val WORLD_NAME = "world"
     const val RESPAWN_HEALTH = 20.0
     const val RESPAWN_Y = 200.0
     const val NO_CLEAN_SECONDS = 10
@@ -32,9 +32,13 @@ object Config {
     val RECEIVED_REWARD = +"&a&l恭喜你答對！獎品已發到背包當中"
     val PLAYER_CORRECT_BROADCAST = +"&6&l<player> 答對了！"
     val ANSWER_SHOULD_BE_SINGLETON = (+"&c這個答案已經被其他問題使用了").asText()
-
     val QUESTION_FULLY_ANSWERED_TITLE = +"&6&l問題已經被所有人回答完畢"
     val QUESTION_FULLY_ANSWERED_SUB = +"&7內容: <quesiton>"
+
+    val CMD_START = "start"
+    val PERM_START = "start".asPerm()
+    val START_ALREADY_STARTED = (+"&c遊戲已經開始了").asText()
+    val START_GAME_STARTED_TITLE = +"&6&l遊戲開始了！"
 
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
     val FAIL_WAITING_STATE = (+"&c此指令在等待狀態還無法執行").asText()

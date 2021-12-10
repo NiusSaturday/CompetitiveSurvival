@@ -57,6 +57,8 @@ dependencies {
 
     testImplementation("org.spigotmc:spigot-api:$spigot_version")
 
+    testCompileOnly(kotlin("stdlib-jdk8")) // embedded in KotlinBukkitAPI
+
     //compileOnly("br.com.devsrsouza.kotlinbukkitapi:exposed:$kotlinbukkitapi_version", changing)
     //compileOnly("br.com.devsrsouza.kotlinbukkitapi:plugins:$kotlinbukkitapi_version", changing)
 
