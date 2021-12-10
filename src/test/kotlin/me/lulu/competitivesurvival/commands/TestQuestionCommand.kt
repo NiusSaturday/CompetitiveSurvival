@@ -92,10 +92,20 @@ class TestQuestionCommand : CommandTestTemplate() {
                                 .replace("<material>", "STONE")
                                 .replace("<amount>", "1")
                         }
+
+                        it("Add another question with same answer") {
+                            execCmdStr("question answer STONE 1 1")
+
+                            it("send message") {
+                                sender.nextMessage() shouldBe Config.ANSWER_SHOULD_BE_SINGLETON.toPlainText()
+                            }
+                        }
                     }
                 }
             }
         }
+
+
     }
 
     private fun assertInvalid(args: String, exceptedMessage: TextComponent) {

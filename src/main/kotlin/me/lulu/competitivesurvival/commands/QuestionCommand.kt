@@ -23,15 +23,18 @@ fun CompetitiveSurvival.registerQuestionCommand() = command(Config.CMD_QUESTION)
             fail(Config.FAIL_WAITING_STATE)
 
         val title = string(0, argMissing = helpMessage)
-        val question = string(1, argMissing = helpMessage)
+        val answer = string(1, argMissing = helpMessage)
         val material = material(2, argMissing = helpMessage, notFound = Config.QUESTION_INVLID_MATERIAL)
         val amount = int(3, argMissing = helpMessage, numberFormat = Config.QUESTION_INVLID_NUMBER)
         val picks = int(4, argMissing = helpMessage, numberFormat = Config.QUESTION_INVLID_NUMBER)
 
+        if (questionManager.getQuestionForThisAnswer(answer) != null)
+            fail(Config.ANSWER_SHOULD_BE_SINGLETON)
+
         questionManager.addQuestion(
             Question(
                 title = title,
-                answer = question,
+                answer = answer,
                 rewardMaterial = material,
                 amount = amount,
                 picks = picks
