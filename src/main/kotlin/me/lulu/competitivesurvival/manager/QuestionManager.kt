@@ -1,8 +1,11 @@
 package me.lulu.competitivesurvival.manager
 
 import br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle.LifecycleListener
+import br.com.devsrsouza.kotlinbukkitapi.extensions.server.onlinePlayers
 import me.lulu.competitivesurvival.CompetitiveSurvival
+import me.lulu.competitivesurvival.Config
 import me.lulu.competitivesurvival.Question
+import org.bukkit.entity.Player
 
 class QuestionManager(override val plugin: CompetitiveSurvival) : LifecycleListener<CompetitiveSurvival> {
 
@@ -22,4 +25,33 @@ class QuestionManager(override val plugin: CompetitiveSurvival) : LifecycleListe
         }
     }
 
+    fun checkAnsweringAnything(message: String, player: Player) {
+        getQuestionForThisAnswer(message)?.let {
+            answerCorrect(it, player)
+        }
+    }
+
+    private fun removeQuestion(question: Question) {
+        this.questions.remove(question)
+    }
+
+
+    private fun answerCorrect(question: Question, player: Player) {
+        if (question.isAnswered(player))
+            return
+
+        question.reward(player)
+        question.addAnswered(player)
+
+        if (question.isFullyAnswered()) {
+            removeQuestion(question)
+
+            onlinePlayers.forEach {
+                it.sendTitle(
+                    Config.QUESTION_FULLY_ANSWERED_TITLE,
+                    Config.QUESTION_FULLY_ANSWERED_SUB.replace("<question>", question.title)
+                )
+            }
+        }
+    }
 }

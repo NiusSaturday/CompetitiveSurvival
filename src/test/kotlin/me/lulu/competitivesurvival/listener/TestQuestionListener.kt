@@ -60,18 +60,21 @@ class TestQuestionListener : MockDescribeTemplate() {
             }
         }
 
-        describe("Picks is zero") {
+        describe("Fully answered") {
             val question = manager.getLatestQuestion()!!
+            val players = listOf(mock.addPlayer(), mock.addPlayer(), mock.addPlayer())
 
-            question.answerCorrect(mock.addPlayer())
-            question.answerCorrect(mock.addPlayer())
-            question.answerCorrect(mock.addPlayer())
+            players.forEach { it.chat("2"); it.nextTitle();it.nextSubTitle() }
 
-            it("Don't give any rewards") {
-                val player = mock.addPlayer()
-                player.chat("2")
+            it("Remove this question") {
+                manager.getQuestionForThisAnswer("2") shouldBe null
+            }
 
-                question.isAnswered(player) shouldBe false
+            it("Broadcast question is fully answered") {
+                players.forEach {
+                    it.nextTitle() shouldBe Config.QUESTION_FULLY_ANSWERED_TITLE
+                    it.nextSubTitle() shouldBe Config.QUESTION_FULLY_ANSWERED_SUB.replace("<question>", question.title)
+                }
             }
         }
     }

@@ -11,19 +11,10 @@ fun CompetitiveSurvival.registerQuestionListener() = events {
 
     if (CompetitiveSurvival.unitTesting)
         event<PlayerChatEvent> {
-            check(message, player)
+            questionManager.checkAnsweringAnything(message, player)
         }
     else
         event<AsyncPlayerChatEvent> {
-            check(message, player)
+            questionManager.checkAnsweringAnything(message, player)
         }
-}
-
-private fun CompetitiveSurvival.check(msg: String, player: Player) {
-    questionManager.getQuestionForThisAnswer(msg)?.let {
-        if (it.isAnswered(player) || it.isFullyAnswered())
-            return
-        else
-            it.answerCorrect(player)
-    }
 }

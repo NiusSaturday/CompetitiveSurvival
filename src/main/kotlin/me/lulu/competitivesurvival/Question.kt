@@ -19,12 +19,8 @@ data class Question(
 ) {
     private val answered = mutableListOf<UUID>()
 
-    fun answerCorrect(player: Player) {
-        reward(player)
-        answered.add(player.uniqueId)
-    }
 
-    private fun reward(player: Player) {
+    fun reward(player: Player) {
         player.inventory.addItem(item(rewardMaterial, amount))
 
         player.sendTitle(Config.RECEIVED_REWARD, "")
@@ -39,5 +35,9 @@ data class Question(
 
     fun isFullyAnswered(): Boolean {
         return this.getAnsweredPlayers().size >= this.picks
+    }
+
+    fun addAnswered(player: Player) {
+        this.answered.add(player.uniqueId)
     }
 }
