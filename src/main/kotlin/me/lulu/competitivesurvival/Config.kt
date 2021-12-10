@@ -29,6 +29,8 @@ object Config {
     val QUESTION_INVLID_NUMBER = (+"&c物品的數量應為數字").asText()
     val QUESTION_TITLE_PREFIX = +"&c&l請問: &6&l"
     val QUESTION_SUB_TITLE = +"&7前 &f&l<picks> &7位玩家將獲得 &e&l<material> x<amount>"
+    val RECEIVED_REWARD = +"&a&l恭喜你答對！獎品已發到背包當中"
+    val PLAYER_CORRECT_BROADCAST = +"&6&l<player> 答對了！"
 
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
     val FAIL_WAITING_STATE = (+"&c此指令在等待狀態還無法執行").asText()

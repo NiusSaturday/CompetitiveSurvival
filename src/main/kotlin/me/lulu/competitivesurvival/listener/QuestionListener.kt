@@ -21,7 +21,9 @@ fun CompetitiveSurvival.registerQuestionListener() = events {
 
 private fun CompetitiveSurvival.check(msg: String, player: Player) {
     questionManager.getQuestionForThisAnswer(msg)?.let {
-        it.reward(player)
-        it.removePicks(1)
+        if (it.isAnswered(player))
+            return
+        else
+            it.answerCorrect(player)
     }
 }
