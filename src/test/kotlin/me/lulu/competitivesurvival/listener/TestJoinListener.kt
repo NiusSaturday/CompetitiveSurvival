@@ -8,10 +8,21 @@ import me.lulu.competitivesurvival.GameRole
 import me.lulu.competitivesurvival.GameState
 import me.lulu.competitivesurvival.makePlayer
 import org.bukkit.GameMode
-import org.bukkit.entity.Player
 
 class TestJoinListener : MockDescribeTemplate() {
     init {
+
+        it("Join should always in game world") {
+            val player = PlayerMock(mock, "Test")
+            val anotherWorld = mock.addSimpleWorld("another_world")
+
+            player.teleport(anotherWorld.spawnLocation)
+
+            mock.addPlayer(player)
+
+            player.world shouldBe plugin.gameWorld
+        }
+
         describe("Game is not yet started") {
             plugin.gameState = GameState.WAITING
 

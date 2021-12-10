@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 fun CompetitiveSurvival.registerJoinListener() = events {
 
     event<PlayerJoinEvent> {
+        player.teleport(gameWorld.spawnLocation)
 
         when (gameState) {
             GameState.WAITING -> {
@@ -21,7 +22,6 @@ fun CompetitiveSurvival.registerJoinListener() = events {
                     player.health = 0.0
             }
         }
-
     }
 
 }

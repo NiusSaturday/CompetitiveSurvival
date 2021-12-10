@@ -25,8 +25,10 @@ class CompetitiveSurvival : KotlinPlugin {
     val questionManager = lifecycle { QuestionManager(this) }
     val roleManager = lifecycle { RoleManager(this) }
     val noCleanManager = lifecycle { NoCleanManager(this) }
+
     var pvpEnable: Boolean = false
     var gameState: GameState = GameState.WAITING
+    lateinit var gameWorld: World
 
     lateinit var togglePvPCommand: CommandDSL
     lateinit var gmCommand: CommandDSL
@@ -48,7 +50,8 @@ class CompetitiveSurvival : KotlinPlugin {
         registerDamageListener()
         registerJoinListener()
 
-        setupWorld(Bukkit.createWorld(WorldCreator(Config.WORLD_NAME)))
+        this.gameWorld = Bukkit.createWorld(WorldCreator(Config.WORLD_NAME))
+        setupWorld(this.gameWorld)
     }
 
     fun setupWorld(world: World) {

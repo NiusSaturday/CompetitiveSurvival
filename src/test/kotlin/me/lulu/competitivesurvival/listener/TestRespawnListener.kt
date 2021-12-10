@@ -1,31 +1,25 @@
 package me.lulu.competitivesurvival.listener
 
 import MockBukkitTemplate
-import be.seeseemelk.mockbukkit.WorldMock
 import io.kotest.matchers.shouldBe
 import me.lulu.competitivesurvival.Config
 import me.lulu.competitivesurvival.TestUtils
-import me.lulu.competitivesurvival.TestUtils.afterKill
 import me.lulu.competitivesurvival.TestUtils.afterRespawn
-import mocks.WorldMockImpl
 import org.bukkit.Location
+import org.bukkit.World
 import org.bukkit.entity.Player
 
 class TestRespawnListener : MockBukkitTemplate() {
 
     private lateinit var player: Player
-    private lateinit var world: WorldMock;
+    private lateinit var world: World;
 
     @BeforeEach
     override fun setup() {
         super.setup()
 
         this.player = mock.addPlayer()
-        this.world = WorldMockImpl()
-        world.name = Config.WORLD_NAME
-        mock.addWorld(world)
-
-        this.player.teleport(world.spawnLocation)
+        this.world = plugin.gameWorld
     }
 
     @Test
@@ -45,7 +39,7 @@ class TestRespawnListener : MockBukkitTemplate() {
 
     @Test
     fun playerRespawn_AlwaysRespawnInMainWorld() {
-        val anotherWorld = WorldMockImpl()
+        val anotherWorld = mock.addSimpleWorld("another")
 
         player.teleport(anotherWorld.spawnLocation)
 
