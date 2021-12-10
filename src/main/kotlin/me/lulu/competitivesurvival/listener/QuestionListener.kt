@@ -21,7 +21,7 @@ fun CompetitiveSurvival.registerQuestionListener() = events {
 
 private fun CompetitiveSurvival.check(msg: String, player: Player) {
     questionManager.getQuestionForThisAnswer(msg)?.let {
-        if (it.isAnswered(player))
+        if (it.isAnswered(player) || it.isFullyAnswered())
             return
         else
             it.answerCorrect(player)

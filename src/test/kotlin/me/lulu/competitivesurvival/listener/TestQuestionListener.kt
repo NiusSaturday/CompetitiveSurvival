@@ -26,8 +26,7 @@ class TestQuestionListener : MockDescribeTemplate() {
             player.chat("WRONG_ANSWER")
 
             it("Nothing happens") {
-                manager.getLatestQuestion()!!.picks shouldBe 3
-                player.inventory.isEmpty shouldBe true
+                manager.getLatestQuestion()!!.isAnswered(player) shouldBe false
             }
         }
 
@@ -45,19 +44,34 @@ class TestQuestionListener : MockDescribeTemplate() {
                     .replace("<player>", player.name)
             }
 
-            it("picks minus 1") {
-                manager.getLatestQuestion()!!.picks shouldBe 2
+            it("mark answered") {
+                manager.getLatestQuestion()!!.isAnswered(player) shouldBe true
             }
+        }
 
-            describe("Answer again") {
-                val inventoryPrev = player.inventory
+        describe("Answer twice") {
+            val player = mock.addPlayer()
 
+            player.chat("2")
+            player.chat("2")
+
+            it("Only reward once") {
+                manager.getLatestQuestion()!!.getAnsweredPlayers().size shouldBe 1
+            }
+        }
+
+        describe("Picks is zero") {
+            val question = manager.getLatestQuestion()!!
+
+            question.answerCorrect(mock.addPlayer())
+            question.answerCorrect(mock.addPlayer())
+            question.answerCorrect(mock.addPlayer())
+
+            it("Don't give any rewards") {
+                val player = mock.addPlayer()
                 player.chat("2")
 
-                it("Do nothing") {
-                    manager.getLatestQuestion()!!.picks shouldBe 2
-                    player.inventory shouldBe inventoryPrev
-                }
+                question.isAnswered(player) shouldBe false
             }
         }
     }

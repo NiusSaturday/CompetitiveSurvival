@@ -15,13 +15,12 @@ data class Question(
     val answer: String,
     val rewardMaterial: Material,
     val amount: Int,
-    var picks: Int
+    val picks: Int
 ) {
-    private val answered = mutableSetOf<UUID>()
+    private val answered = mutableListOf<UUID>()
 
     fun answerCorrect(player: Player) {
         reward(player)
-        removePicks(1)
         answered.add(player.uniqueId)
     }
 
@@ -32,11 +31,13 @@ data class Question(
         broadcast(Config.PLAYER_CORRECT_BROADCAST.replace("<player>", player.name))
     }
 
-    private fun removePicks(i: Int) {
-        this.picks -= i
-    }
-
     fun isAnswered(player: Player): Boolean {
         return this.answered.contains(player.uniqueId)
+    }
+
+    fun getAnsweredPlayers() = this.answered.toList()
+
+    fun isFullyAnswered(): Boolean {
+        return this.getAnsweredPlayers().size >= this.picks
     }
 }
