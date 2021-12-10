@@ -8,6 +8,7 @@ import me.lulu.competitivesurvival.commands.registerStaffCommand
 import me.lulu.competitivesurvival.commands.registerTogglePvPCommand
 import me.lulu.competitivesurvival.listener.registerDamageListener
 import me.lulu.competitivesurvival.listener.registerJoinListener
+import me.lulu.competitivesurvival.listener.registerQuestionListener
 import me.lulu.competitivesurvival.listener.registerRespawnListener
 import me.lulu.competitivesurvival.manager.NoCleanManager
 import me.lulu.competitivesurvival.manager.QuestionManager
@@ -49,6 +50,7 @@ class CompetitiveSurvival : KotlinPlugin {
         registerRespawnListener()
         registerDamageListener()
         registerJoinListener()
+        registerQuestionListener()
 
         this.gameWorld = Bukkit.createWorld(WorldCreator(Config.WORLD_NAME))
         setupWorld(this.gameWorld)
@@ -74,4 +76,8 @@ class CompetitiveSurvival : KotlinPlugin {
         dataFolder,
         file
     )
+
+    companion object {
+        var unitTesting = false
+    }
 }

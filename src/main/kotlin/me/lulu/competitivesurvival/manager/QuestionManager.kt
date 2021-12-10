@@ -16,4 +16,10 @@ class QuestionManager(override val plugin: CompetitiveSurvival) : LifecycleListe
         questions.add(question)
     }
 
+    fun getQuestionForThisAnswer(message: String): Question? {
+        return questions.firstOrNull {
+            it.answer == message
+        }
+    }
+
 }

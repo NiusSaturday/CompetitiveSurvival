@@ -11,7 +11,6 @@ object Config {
 
     val CMD_TOGGLE_PVP = "toggle-pvp"
     val PERM_TOGGLE_PVP = "toggle-pvp".asPerm()
-    val TOGGLE_PVP_FAIL_WAITING_STATE = +"&c此指令在等待狀態還無法執行"
     val PVP_TOGGLE_ON = +"&aPvP 已開啟"
     val PVP_TOGGLE_OFF = +"&cPvP 已關閉"
 
@@ -32,6 +31,7 @@ object Config {
     val QUESTION_SUB_TITLE = +"&7前 &f&l<picks> &7位玩家將獲得 &e&l<material> x<amount>"
 
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
+    val FAIL_WAITING_STATE = (+"&c此指令在等待狀態還無法執行").asText()
 
     private fun String.asPerm(): String {
         return "niu.competitive-survival.$this"

@@ -18,6 +18,7 @@ abstract class MockBukkitTemplate : AnnotationSpec() {
         KotlinBukkitAPITest.testMode = true
         MockBukkit.loadWith(KotlinBukkitAPI::class.java, File("lib/kt-api.yml"))
 
+        CompetitiveSurvival.unitTesting = true
         plugin = MockBukkit.loadWith(CompetitiveSurvival::class.java, File("src/main/resources/plugin.yml"));
     }
 

@@ -1,21 +1,21 @@
 package me.lulu.competitivesurvival.manager
 
-import MockBukkitTemplate
+import MockDescribeTemplate
 import io.kotest.matchers.shouldBe
 
-class TestQuestionManager : MockBukkitTemplate() {
+class TestQuestionManager : MockDescribeTemplate() {
 
     private lateinit var manager: QuestionManager
 
-    @BeforeEach
-    override fun setup() {
-        super.setup()
+    override fun beforeEachRoot() {
+        super.beforeEachRoot()
 
         manager = plugin.questionManager
     }
 
-    @Test
-    fun Default_QuestionDoesNotExist() {
-        manager.getLatestQuestion() shouldBe null
+    init {
+        it("Default, question should be empty") {
+            manager.getLatestQuestion() shouldBe null
+        }
     }
 }

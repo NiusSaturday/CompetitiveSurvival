@@ -2,8 +2,6 @@ package me.lulu.competitivesurvival.commands
 
 import io.kotest.matchers.shouldBe
 import CommandTestTemplate
-import be.seeseemelk.mockbukkit.entity.PlayerMock
-import br.com.devsrsouza.kotlinbukkitapi.extensions.server.player
 import me.lulu.competitivesurvival.Config
 import me.lulu.competitivesurvival.GameState
 import org.bukkit.command.Command
@@ -32,7 +30,7 @@ class TestTogglePvPCommand : CommandTestTemplate() {
 
                 it("Can not executed") {
                     executeCommandCheckToggled() shouldBe false
-                    sender.nextMessage() shouldBe Config.TOGGLE_PVP_FAIL_WAITING_STATE
+                    sender.nextMessage() shouldBe Config.FAIL_WAITING_STATE.toPlainText()
                 }
             }
 

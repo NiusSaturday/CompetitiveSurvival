@@ -9,9 +9,8 @@ abstract class CommandTestTemplate : MockDescribeTemplate() {
         sender = mock.addPlayer()
     }
 
-    protected fun executeCommand(vararg args: String) {
+    protected fun executeCommand(vararg args: String) =
         getTestCommand().execute(sender, getTestCommand().label, args)
-    }
 
     protected fun assertCommandRegistered() {
         it("command should be registered") {
