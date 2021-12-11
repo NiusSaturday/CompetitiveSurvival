@@ -40,6 +40,11 @@ object Config {
     val START_ALREADY_STARTED = (+"&c遊戲已經開始了").asText()
     val START_GAME_STARTED_TITLE = +"&6&l遊戲開始了！"
 
+
+    val WIN_NO_ONE_WINS = +"&c&l終界龍因為其他原因死亡，因此沒人獲得勝利。"
+    val WIN_WINNER_TITLE = +"&6&l終界龍被 <killer> 殺死了"
+    val WIN_WINNER_SUB = +"&7&l恭喜玩家獲得本次星期妞的大勝利！"
+
     val NO_PERMISSION: String = +"&c你沒有權限執行此操作。"
     val FAIL_WAITING_STATE = (+"&c此指令在等待狀態還無法執行").asText()
 
