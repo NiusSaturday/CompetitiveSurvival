@@ -7,12 +7,16 @@ import me.lulu.competitivesurvival.CompetitiveSurvival
 import me.lulu.competitivesurvival.Config
 import me.lulu.competitivesurvival.GameRole
 import me.lulu.competitivesurvival.events.GameStartEvent
+import org.bukkit.Difficulty
 import org.bukkit.GameMode
 import org.bukkit.entity.Player
 
 fun CompetitiveSurvival.registerGameStartListener() = events {
 
     event<GameStartEvent> {
+
+        gameWorld.difficulty = Difficulty.HARD
+
         onlinePlayers.forEach {
             it.sendTitle(Config.START_GAME_STARTED_TITLE, "")
             changeGamemodeByRole(it)

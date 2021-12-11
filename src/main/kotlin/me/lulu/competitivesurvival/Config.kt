@@ -33,7 +33,7 @@ object Config {
     val PLAYER_CORRECT_BROADCAST = +"&6&l<player> 答對了！"
     val ANSWER_SHOULD_BE_SINGLETON = (+"&c這個答案已經被其他問題使用了").asText()
     val QUESTION_FULLY_ANSWERED_TITLE = +"&6&l問題已經被所有人回答完畢"
-    val QUESTION_FULLY_ANSWERED_SUB = +"&7內容: <quesiton>"
+    val QUESTION_FULLY_ANSWERED_SUB = +"&7內容: <question>"
 
     val CMD_START = "start"
     val PERM_START = "start".asPerm()

@@ -8,7 +8,7 @@ class TestPlugin : MockBukkitTemplate() {
 
     @Test
     fun worldSetup_Difficulty() {
-        Difficulty.HARD shouldBe plugin.gameWorld.difficulty
+        Difficulty.PEACEFUL shouldBe plugin.gameWorld.difficulty
     }
 
     @Test

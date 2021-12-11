@@ -6,6 +6,7 @@ import io.kotest.matchers.shouldBe
 import me.lulu.competitivesurvival.Config
 import me.lulu.competitivesurvival.GameRole
 import me.lulu.competitivesurvival.events.GameStartEvent
+import org.bukkit.Difficulty
 import org.bukkit.GameMode
 
 class TestGameStartListener : MockDescribeTemplate() {
@@ -26,6 +27,10 @@ class TestGameStartListener : MockDescribeTemplate() {
             it("Change Gamemodes") {
                 player.gameMode shouldBe GameMode.SURVIVAL
                 staff.gameMode shouldBe GameMode.CREATIVE
+            }
+
+            it("Change difficulty to HARD") {
+                plugin.gameWorld.difficulty shouldBe Difficulty.HARD
             }
         }
     }

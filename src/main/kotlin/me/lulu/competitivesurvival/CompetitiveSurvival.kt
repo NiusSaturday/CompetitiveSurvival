@@ -43,13 +43,14 @@ class CompetitiveSurvival : KotlinPlugin {
         registerJoinListener()
         registerQuestionListener()
         registerGameStartListener()
+        registerMiscListener()
 
         this.gameWorld = Bukkit.createWorld(WorldCreator(Config.WORLD_NAME))
         setupWorld(this.gameWorld)
     }
 
     fun setupWorld(world: World) {
-        world.difficulty = Difficulty.HARD
+        world.difficulty = Difficulty.PEACEFUL
         setupWorldBorder(world)
     }
 
