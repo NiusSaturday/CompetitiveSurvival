@@ -41,7 +41,7 @@ class TestWinListener : MockDescribeTemplate() {
         it("Killed by someone, broadcast winner") {
             killDragon(killer = player)
 
-            player.nextTitle() shouldBe Config.WIN_WINNER_TITLE
+            player.nextTitle() shouldBe Config.WIN_WINNER_TITLE.replace("<killer>", player.name)
             player.nextSubTitle() shouldBe Config.WIN_WINNER_SUB
         }
     }

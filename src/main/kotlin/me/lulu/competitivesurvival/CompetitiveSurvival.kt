@@ -45,6 +45,7 @@ class CompetitiveSurvival : KotlinPlugin {
         registerGameStartListener()
         registerMiscListener()
         registerWinListener()
+        registerInvSeeListener()
 
         this.gameWorld = Bukkit.createWorld(WorldCreator(Config.WORLD_NAME))
         setupWorld(this.gameWorld)

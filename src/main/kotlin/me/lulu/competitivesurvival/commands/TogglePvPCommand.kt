@@ -20,6 +20,6 @@ fun CompetitiveSurvival.registerTogglePvPCommand() = command(Config.CMD_TOGGLE_P
 
         pvpEnable = !pvpEnable
 
-        onlinePlayers.forEach { it.sendTitle(Config.PVP_TOGGLE_ON, "") }
+        onlinePlayers.forEach { it.sendTitle(if (pvpEnable) Config.PVP_TOGGLE_ON else Config.PVP_TOGGLE_OFF, "") }
     }
 }

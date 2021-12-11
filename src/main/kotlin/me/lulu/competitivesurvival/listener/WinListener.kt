@@ -23,7 +23,7 @@ fun CompetitiveSurvival.registerWinListener() = events {
             broadcast(Config.WIN_NO_ONE_WINS)
         else
             onlinePlayers.forEach {
-                it.sendTitle(Config.WIN_WINNER_TITLE, Config.WIN_WINNER_SUB)
+                it.sendTitle(Config.WIN_WINNER_TITLE.replace("<killer>", killer.name), Config.WIN_WINNER_SUB)
             }
     }
 
